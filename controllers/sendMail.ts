@@ -18,7 +18,7 @@ const oauth2Client = new OAuth2(
 )
 
 // send mail
-const sendEmail = (to, url, txt) => {
+const sendEmail = (to: any, url: any, txt: any) => {
     oauth2Client.setCredentials({
         refresh_token: MAILING_SERVICE_REFRESH_TOKEN
     })
@@ -39,7 +39,7 @@ const sendEmail = (to, url, txt) => {
     const mailOptions = {
         from: SENDER_EMAIL_ADDRESS,
         to: to,
-        subject: "DevAT Channel",
+        subject: "CYFER MAIL VERIFICATION",
         html: `
             <div style="max-width: 700px; margin:auto; border: 10px solid #ddd; padding: 50px 20px; font-size: 110%;">
             <h2 style="text-align: center; text-transform: uppercase;color: teal;">Welcome to the DevAT channel.</h2>
@@ -56,10 +56,10 @@ const sendEmail = (to, url, txt) => {
         `
     }
 
-    smtpTransport.sendMail(mailOptions, (err, infor) => {
+    smtpTransport.sendMail(mailOptions, (err: {}, infor: any) => {
         if(err) return err;
         return infor
     })
 }
 
-module.exports = sendEmail
+export default sendEmail
