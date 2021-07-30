@@ -11,15 +11,15 @@ const client = new OAuth2(process.env.MAILING_SERVICE_CLIENT_ID)
 const {CLIENT_URL} = process.env
 
 const userCtrl = {
-    register: async (req, res) => {
+    register: async (req: any, res: any) => {
         try {
-            const {name, email, password} = req.body
+            const {firstName, lastName, email, password} = req.body
             
-            if(!name || !email || !password)
+            if(!firstName || !lastName || !email || !password)
                 return res.status(400).json({msg: "Please fill in all fields."})
 
             if(!validateEmail(email))
-                return res.status(400).json({msg: "Invalid emails."})
+                return res.status(400).json({msg: "Invalid email."})
 
             const user = await Users.findOne({email})
             if(user) return res.status(400).json({msg: "This email already exists."})
@@ -30,7 +30,7 @@ const userCtrl = {
             const passwordHash = await bcrypt.hash(password, 12)
 
             const newUser = {
-                name, email, password: passwordHash
+                firstName, lastName, email, password: passwordHash
             }
 
             const activation_token = createActivationToken(newUser)
@@ -39,7 +39,7 @@ const userCtrl = {
             sendMail(email, url, "Verify your email address")
 
 
-            res.json({msg: "Register Success! Please activate your email to start."})
+            res.json({msg: "Registeration Successful! Please activate your email to start."})
         } catch (err) {
             return res.status(500).json({msg: err.message})
         }
@@ -49,13 +49,13 @@ const userCtrl = {
             const {activation_token} = req.body
             const user = jwt.verify(activation_token, process.env.ACTIVATION_TOKEN_SECRET)
 
-            const {name, email, password} = user
+            const {firstName, lastName, email, password} = user
 
             const check = await Users.findOne({email})
             if(check) return res.status(400).json({msg:"This email already exists."})
 
             const newUser = new Users({
-                name, email, password
+                firstName, lastName, email, password
             })
 
             await newUser.save()
@@ -141,15 +141,6 @@ const userCtrl = {
             return res.status(500).json({msg: err.message})
         }
     },
-    getUsersAllInfor: async (req, res) => {
-        try {
-            const users = await Users.find().select('-password')
-
-            res.json(users)
-        } catch (err) {
-            return res.status(500).json({msg: err.message})
-        }
-    },
     logout: async (req, res) => {
         try {
             res.clearCookie('refreshtoken', {path: '/user/refresh_token'})
@@ -160,22 +151,9 @@ const userCtrl = {
     },
     updateUser: async (req, res) => {
         try {
-            const {name, avatar} = req.body
+            const {firstName, lastName} = req.body
             await Users.findOneAndUpdate({_id: req.user.id}, {
-                name, avatar
-            })
-
-            res.json({msg: "Update Success!"})
-        } catch (err) {
-            return res.status(500).json({msg: err.message})
-        }
-    },
-    updateUsersRole: async (req, res) => {
-        try {
-            const {role} = req.body
-
-            await Users.findOneAndUpdate({_id: req.params.id}, {
-                role
+                firstName, lastName
             })
 
             res.json({msg: "Update Success!"})
@@ -198,7 +176,7 @@ const userCtrl = {
 
             const verify = await client.verifyIdToken({idToken: tokenId, audience: process.env.MAILING_SERVICE_CLIENT_ID})
             
-            const {email_verified, email, name, picture} = verify.payload
+            const {email_verified, email, firstName, lastName} = verify.payload
 
             const password = email + process.env.GOOGLE_SECRET
 
@@ -222,7 +200,7 @@ const userCtrl = {
                 res.json({msg: "Login success!"})
             }else{
                 const newUser = new Users({
-                    name, email, password: passwordHash, avatar: picture
+                    firstName, lastName, email, password: passwordHash
                 })
 
                 await newUser.save()
@@ -250,7 +228,7 @@ const userCtrl = {
             
             const data = await fetch(URL).then(res => res.json()).then(res => {return res})
 
-            const {email, name, picture} = data
+            const {email, firstName, lastName} = data
 
             const password = email + process.env.FACEBOOK_SECRET
 
@@ -272,7 +250,7 @@ const userCtrl = {
                 res.json({msg: "Login success!"})
             }else{
                 const newUser = new Users({
-                    name, email, password: passwordHash, avatar: picture.data.url
+                    firstName, lastName, email, password: passwordHash
                 })
 
                 await newUser.save()
@@ -298,7 +276,7 @@ const userCtrl = {
 
 
 
-function validateEmail(email) {
+function validateEmail(email: string) {
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
 }

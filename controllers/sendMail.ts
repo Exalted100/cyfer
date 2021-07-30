@@ -18,7 +18,7 @@ const oauth2Client = new OAuth2(
 )
 
 // send mail
-const sendEmail = (to: any, url: any, txt: any) => {
+const sendEmail = (to: string, url: string, txt: string) => {
     oauth2Client.setCredentials({
         refresh_token: MAILING_SERVICE_REFRESH_TOKEN
     })
@@ -43,7 +43,7 @@ const sendEmail = (to: any, url: any, txt: any) => {
         html: `
             <div style="max-width: 700px; margin:auto; border: 10px solid #ddd; padding: 50px 20px; font-size: 110%;">
             <h2 style="text-align: center; text-transform: uppercase;color: teal;">Welcome to the DevAT channel.</h2>
-            <p>Congratulations! You're almost set to start using DEVAT✮SHOP.
+            <p>Congratulations! You're almost set to start using CYFER.
                 Just click the button below to validate your email address.
             </p>
             
@@ -56,7 +56,7 @@ const sendEmail = (to: any, url: any, txt: any) => {
         `
     }
 
-    smtpTransport.sendMail(mailOptions, (err: {}, infor: any) => {
+    smtpTransport.sendMail(mailOptions, (err: any, infor: any) => {
         if(err) return err;
         return infor
     })
