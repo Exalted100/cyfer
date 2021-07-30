@@ -9,6 +9,6 @@ const handler = nc()
 
 handler.use(middleware)
 
-handler.post(middleware, userCtrl.register)
+handler.post(userCtrl.register)
 
 export default handler

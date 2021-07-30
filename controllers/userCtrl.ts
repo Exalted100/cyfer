@@ -1,9 +1,9 @@
-const Users = require('../models/userModel')
-const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
-const sendMail = require('./sendMail')
+import Users from '../models/userModel'
+import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
+import sendMail from './sendMail'
 
-const {google} = require('googleapis')
+import {google} from 'googleapis'
 const {OAuth2} = google.auth
 
 const client = new OAuth2(process.env.MAILING_SERVICE_CLIENT_ID)
