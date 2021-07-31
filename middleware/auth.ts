@@ -1,15 +1,11 @@
-import jwt from 'jsonwebtoken'
+import jwt, { TokenExpiredError } from 'jsonwebtoken'
 
-type nextReturnType = {
-    done: boolean
-}
-
-const auth = (req: any, res: any, next: () => nextReturnType) => {
+const auth = (req: any, res: any, next: any) => {
     try {
         const token = req.header("Authorization")
         if(!token) return res.status(400).json({msg: "Invalid Authentication."})
 
-        jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err: {}, user: {}) => {
+        jwt.verify(token, process.env.ACCESS_TOKEN_SECRET || "", (err: any, user: any) => {
             if(err) return res.status(400).json({msg: "Invalid Authentication."})
 
             req.user = user

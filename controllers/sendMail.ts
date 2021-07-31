@@ -1,4 +1,4 @@
-import nodemailer from 'nodemailer'
+import nodemailer, { TransportOptions } from 'nodemailer'
 import {google} from 'googleapis'
 const {OAuth2} = google.auth;
 
@@ -24,7 +24,7 @@ const sendEmail = (to: string, url: string, txt: string) => {
 
     const accessToken = oauth2Client.getAccessToken()
     const smtpTransport = nodemailer.createTransport({
-        service: 'gmail',
+        service: "gmail",
         auth: {
             type: 'OAuth2',
             user: SENDER_EMAIL_ADDRESS,
@@ -34,7 +34,7 @@ const sendEmail = (to: string, url: string, txt: string) => {
             refreshToken: MAILING_SERVICE_REFRESH_TOKEN,
             accessToken
         }
-    })
+    } as TransportOptions)
 
     const mailOptions = {
         from: SENDER_EMAIL_ADDRESS,

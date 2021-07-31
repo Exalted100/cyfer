@@ -47,7 +47,7 @@ const userCtrl = {
     activateEmail: async (req: any, res: any) => {
         try {
             const {activation_token} = req.body
-            const user = jwt.verify(activation_token, process.env.ACTIVATION_TOKEN_SECRET)
+            const user: any = jwt.verify(activation_token, process.env.ACTIVATION_TOKEN_SECRET || "")
 
             const {firstName, lastName, email, password} = user
 
@@ -92,7 +92,7 @@ const userCtrl = {
             const rf_token = req.cookies.refreshtoken
             if(!rf_token) return res.status(400).json({msg: "Please login now!"})
 
-            jwt.verify(rf_token, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
+            jwt.verify(rf_token, process.env.REFRESH_TOKEN_SECRET || "", (err: any, user: any) => {
                 if(err) return res.status(400).json({msg: "Please login now!"})
 
                 const access_token = createAccessToken({id: user.id})
@@ -368,15 +368,15 @@ function validateEmail(email: string) {
 }
 
 const createActivationToken = (payload: createActivationTokenType) => {
-    return jwt.sign(payload, process.env.ACTIVATION_TOKEN_SECRET, {expiresIn: '5m'})
+    return jwt.sign(payload, process.env.ACTIVATION_TOKEN_SECRET || "", {expiresIn: '5m'})
 }
 
-const createAccessToken = (payload) => {
-    return jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '15m'})
+const createAccessToken = (payload: {id: string}) => {
+    return jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET || "", {expiresIn: '15m'})
 }
 
-const createRefreshToken = (payload) => {
-    return jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET, {expiresIn: '7d'})
+const createRefreshToken = (payload: {id: string}) => {
+    return jwt.sign(payload, process.env.REFRESH_TOKEN_SECRET || "", {expiresIn: '7d'})
 }
 
 export default userCtrl
