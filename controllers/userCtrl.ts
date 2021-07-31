@@ -175,9 +175,16 @@ const userCtrl = {
             const {tokenId} = req.body
 
             const verify = await client.verifyIdToken({idToken: tokenId, audience: process.env.MAILING_SERVICE_CLIENT_ID})
-            
-            const {email_verified, email, firstName, lastName} = verify.payload
 
+            const payload = verify.getPayload()
+
+            const email_verified: any = payload?.email_verified
+            const email: any = payload?.email
+            const name: any = payload?.name
+
+            const firstName = name.split(" ")[0]
+            const lastName = name.split(" ")[1]
+            
             const password = email + process.env.GOOGLE_SECRET
 
             const passwordHash = await bcrypt.hash(password, 12)
