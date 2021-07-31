@@ -21,7 +21,8 @@ const userSchema = new mongoose.Schema({
         title: String,
         note: String,
         password: String,
-        dateCreated: Date
+        dateCreated: Date,
+        id: Number
     }],
     password: {
         type: String,

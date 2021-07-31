@@ -44,7 +44,7 @@ const userCtrl = {
             return res.status(500).json({msg: err.message})
         }
     },
-    activateEmail: async (req, res) => {
+    activateEmail: async (req: any, res: any) => {
         try {
             const {activation_token} = req.body
             const user = jwt.verify(activation_token, process.env.ACTIVATION_TOKEN_SECRET)
@@ -66,7 +66,7 @@ const userCtrl = {
             return res.status(500).json({msg: err.message})
         }
     },
-    login: async (req, res) => {
+    login: async (req: any, res: any) => {
         try {
             const {email, password} = req.body
             const user = await Users.findOne({email})
@@ -82,12 +82,12 @@ const userCtrl = {
                 maxAge: 7*24*60*60*1000 // 7 days
             })
 
-            res.json({msg: "Login success!"})
+            res.json({msg: "Login successful!"})
         } catch (err) {
             return res.status(500).json({msg: err.message})
         }
     },
-    getAccessToken: (req, res) => {
+    getAccessToken: (req: any, res: any) => {
         try {
             const rf_token = req.cookies.refreshtoken
             if(!rf_token) return res.status(400).json({msg: "Please login now!"})
@@ -102,7 +102,7 @@ const userCtrl = {
             return res.status(500).json({msg: err.message})
         }
     },
-    forgotPassword: async (req, res) => {
+    forgotPassword: async (req: any, res: any) => {
         try {
             const {email} = req.body
             const user = await Users.findOne({email})
@@ -117,7 +117,7 @@ const userCtrl = {
             return res.status(500).json({msg: err.message})
         }
     },
-    resetPassword: async (req, res) => {
+    resetPassword: async (req: any, res: any) => {
         try {
             const {password} = req.body
             console.log(password)
@@ -132,7 +132,7 @@ const userCtrl = {
             return res.status(500).json({msg: err.message})
         }
     },
-    getUserInfor: async (req, res) => {
+    getUserInfor: async (req: any, res: any) => {
         try {
             const user = await Users.findById(req.user.id).select('-password')
 
@@ -141,7 +141,7 @@ const userCtrl = {
             return res.status(500).json({msg: err.message})
         }
     },
-    logout: async (req, res) => {
+    logout: async (req: any, res: any) => {
         try {
             res.clearCookie('refreshtoken', {path: '/user/refresh_token'})
             return res.json({msg: "Logged out."})
@@ -149,28 +149,28 @@ const userCtrl = {
             return res.status(500).json({msg: err.message})
         }
     },
-    updateUser: async (req, res) => {
+    updateUser: async (req: any, res: any) => {
         try {
             const {firstName, lastName} = req.body
             await Users.findOneAndUpdate({_id: req.user.id}, {
                 firstName, lastName
             })
 
-            res.json({msg: "Update Success!"})
+            res.json({msg: "Update Successful!"})
         } catch (err) {
             return res.status(500).json({msg: err.message})
         }
     },
-    deleteUser: async (req, res) => {
+    deleteUser: async (req: any, res: any) => {
         try {
             await Users.findByIdAndDelete(req.query.id)
 
-            res.json({msg: "Deleted Success!"})
+            res.json({msg: "Delete Successful!"})
         } catch (err) {
             return res.status(500).json({msg: err.message})
         }
     },
-    googleLogin: async (req, res) => {
+    googleLogin: async (req: any, res: any) => {
         try {
             const {tokenId} = req.body
 
@@ -220,7 +220,7 @@ const userCtrl = {
             return res.status(500).json({msg: err.message})
         }
     },
-    facebookLogin: async (req, res) => {
+    facebookLogin: async (req: any, res: any) => {
         try {
             const {accessToken, userID} = req.body
 
@@ -269,19 +269,105 @@ const userCtrl = {
         } catch (err) {
             return res.status(500).json({msg: err.message})
         }
+    },
+    createNote: async (req: any, res: any) => {
+        try {
+            const {title, note, password} = req.body
+            
+            if(!title || !note)
+                return res.status(400).json({msg: "Please fill in compulsory fields."})
+
+            if(password.length < 6)
+                return res.status(400).json({msg: "Password must be at least 6 characters."})
+
+            if(!password) {
+                const password = ""
+            }
+
+            const passwordHash = await bcrypt.hash(password, 12)
+
+            const existingNotes = await Users.findById(req.user.id).select('notes')
+
+            const newNote = {
+                title, note, password: passwordHash, date: Date.now(), id: existingNotes.length
+            }
+
+            await Users.findOneAndUpdate({_id: req.user.id}, {
+                notes: [ ...existingNotes, newNote ]
+            })
+
+            res.json({msg: "New note has been created."})
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
+    },
+    getNotes: async (req: any, res: any) => {
+        try {
+            const notes = await Users.findById(req.user.id).select('notes')
+
+            res.json(notes)
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
+    },
+    updateNote: async (req: any, res: any) => {
+        try {
+            const {title, note, password, id} = req.body
+
+            if(password.length < 6)
+                return res.status(400).json({msg: "Password must be at least 6 characters."})
+
+            if(!password) {
+                const password = ""
+            }
+
+            const passwordHash = await bcrypt.hash(password, 12)
+
+            const notes = await Users.findById(req.user.id).select('notes')
+
+            const updatedNote = {
+                title, note, password: passwordHash, date: notes[id].date, id
+            }
+
+            notes.splice(id, 1)
+
+            await Users.findOneAndUpdate({_id: req.user.id}, {
+                notes: [...notes, updatedNote]
+            })
+
+            res.json({msg: "Update Successful!"})
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
+    },
+    deleteNote: async (req: any, res: any) => {
+        try {
+            const { id } = req.body
+            const notes = await Users.findById(req.user.id).select('notes')
+
+            notes.splice(id, 1)
+
+            await Users.findOneAndUpdate({_id: req.user.id}, {
+                notes: [...notes]
+            })
+
+            res.json({msg: "Delete Successful!"})
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
     }
 }
 
 
 
-
+type createActivationTokenType = { firstName: string; lastName: string; email: string; password: string }
 
 function validateEmail(email: string) {
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
 }
 
-const createActivationToken = (payload) => {
+const createActivationToken = (payload: createActivationTokenType) => {
     return jwt.sign(payload, process.env.ACTIVATION_TOKEN_SECRET, {expiresIn: '5m'})
 }
 
