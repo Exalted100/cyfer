@@ -19,6 +19,7 @@
     
     .navigationContainerDesktop ul:nth-child(1) {
         width: 30rem;
+        padding-left: 0;
     }
     
     .navigationContainerDesktop ul:nth-child(2) {
