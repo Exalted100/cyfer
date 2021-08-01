@@ -1,0 +1,138 @@
+/*NAVIGATION BAR DESKTOP*/
+@media only screen and (min-width: 900px) {
+    .navigationContainerMobile {
+        display: none;
+    }
+
+    .navigationContainerDesktop {
+        display: flex;
+        justify-content: space-between;
+        padding: 1.8rem 5rem;
+    }
+    
+    .navigationContainerDesktop > ul {
+        list-style-type: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .navigationContainerDesktop ul:nth-child(1) {
+        width: 30rem;
+    }
+    
+    .navigationContainerDesktop ul:nth-child(2) {
+        width: 13rem;
+    }
+
+    #brandName {
+        color: black;
+        font-size: 2.2rem;
+        font-style: italic;
+        font-weight: bold;
+    }
+    
+    .navigationContainerDesktop > ul > li {
+        color: hsl(0, 0%, 75%);
+    }
+    
+    .navigationContainerDesktop > ul > li:hover {
+        color: black;
+        cursor: pointer;
+    }
+    
+    #signUpButton {
+        border-radius: 3rem;
+        background-color: hsl(180, 66%, 49%);
+        padding: 0.5rem 1rem;
+        color: white;
+    }
+    
+    #signUpButton:hover {
+        background-color: hsl(180, 66%, 65%);
+    }
+}
+
+/*NAVIGATION BAR MOBILE*/
+@media only screen and (max-width: 900px) {
+    .navigationContainerDesktop {
+        display: none;
+    }
+
+    .navigationContainerMobile {
+        z-index: 100;
+        color: white;
+    }
+
+    .navImagesContainer {
+        display: flex;
+        justify-content: space-between;
+        padding: 3rem 2rem;
+    }
+
+    .navImagesContainer div:nth-child(2) {
+        height: fit-content;
+        align-self: center;
+    }
+
+    .navBarMobileContainer {
+        display: none;
+        position: absolute;
+        width: 80%;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        list-style-type: none;
+        text-align: center;
+        background-color: hsl(257, 27%, 26%);
+        height: fit-content;
+        padding: 1rem 0;
+        border-radius: 5px;
+        animation-duration: 0.5s;
+        animation-name: slideup;
+    }
+
+    #brandNameMobile {
+        color: black;
+        font-size: 2.2rem;
+        font-style: italic;
+        font-weight: bold;
+    }
+
+    .navBarMobileContainer li {
+        margin: 2rem 0;
+        font-weight: 700;
+    }
+
+    .navBarMobileContainer li:nth-child(4) {
+        width: 80%;
+        margin: 0 auto;
+        border-top: 1px solid hsl(0, 0%, 50%);
+        padding-top: 2rem;
+    }
+
+    @keyframes slideup {
+        from {
+          margin-top: 100%;
+        }
+      
+        to {
+          margin-top: 0%;
+        }
+      }
+
+      #signUpButton {
+        border-radius: 3rem;
+        background-color: hsl(180, 66%, 49%);
+        padding: 0.5rem 1rem;
+        color: white;
+        width: fit-content;
+        margin: 2rem auto;
+    }
+}
+
+/*TO MAINTAIN NAV BAR STRUCTURE IN MOBILE WHEN THE NAV BAR POSITION IS ABSOLUTE*/
+.structuralDiv {
+    display: none;
+    height: 6rem;
+}
