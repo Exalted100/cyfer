@@ -17,7 +17,7 @@
     .firstDivContainer {
         text-align: center;
         padding: 0 2rem;
-        padding-bottom: 8rem;
+        padding-bottom: 4rem;
         margin-top: 3rem;
     }
 
@@ -113,6 +113,7 @@
     .thirdDivContainer {
         background-color: hsl(257, 7%, 80%);
         padding: 0 2rem;
+        padding-top: 2rem;
         padding-bottom: 3rem;
     }
 

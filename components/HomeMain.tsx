@@ -19,18 +19,18 @@ const HomeMain = () => {
             <div className={styles.advancedStatisticsContainer}>
             <div>
                 <div className={styles.thirdDivImageContainer}></div>
-                <h4>Brand Recognition</h4>
-                <p>Boost your brand recognition with each click. Generic links don’t mean a thing. Branded links help instil confidence in your content.</p>
+                <h4>Access Anywhere</h4>
+                <p>Why limit when you can create and view your notes? No reason. And you can do exactly this with us. You can create and view notes from any device.</p>
             </div>
             <div>
                 <div className={styles.thirdDivImageContainer}></div>
-                <h4>Detailed Records</h4>
-                <p>Gain insights into who is clicking your links. Knowing when and where people engage with your content helps inform better decisions.</p>
+                <h4>Safely Stored</h4>
+                <p>Avoid having your notes fall into the wrong hands. Your notes are safely stored with a cypher. Only you can access your notes with your password.</p>
             </div>
             <div>
                 <div className={styles.thirdDivImageContainer}></div>
-                <h4>Fully Customizable</h4>
-                <p>Improve brand awareness and content discoverability through customizable links, supercharging audience engagement.</p>
+                <h4>Share Notes</h4>
+                <p>Why share your notes through possibly compromised media? Retain the safety of your notes by sharing them right from the web. Simply add other users.</p>
             </div>
             </div>
         </div>
