@@ -7,7 +7,9 @@
     .navigationContainerDesktop {
         display: flex;
         justify-content: space-between;
-        padding: 1.8rem 5rem;
+        padding: 1.8rem 6rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid black;
     }
     
     .navigationContainerDesktop > ul {
@@ -63,12 +65,14 @@
     .navigationContainerMobile {
         z-index: 100;
         color: white;
+        border-bottom: 1px solid black;
     }
 
     .navImagesContainer {
         display: flex;
         justify-content: space-between;
-        padding: 3rem 2rem;
+        padding: 2rem 2rem;
+        padding-bottom: 1rem;
     }
 
     .navImagesContainer div:nth-child(2) {

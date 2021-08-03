@@ -1,0 +1,223 @@
+@media only screen and (min-width: 900px) {
+    .firstDivContainer {
+        display: flex;
+        flex-direction: row-reverse;
+        padding: 0 6rem;
+        padding-bottom: 4rem;
+        margin-top: 3rem;
+        justify-content: space-between;
+    }
+
+    .firstDivContainer div {
+        flex: 0.45;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .firstDivContainer {
+        text-align: center;
+        padding: 0 2rem;
+        padding-bottom: 8rem;
+        margin-top: 3rem;
+    }
+
+    .callToAction {
+        margin: 0 auto;
+    }
+}
+
+.landingPageHeader {
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 3.8rem;
+}
+
+.landingPageDescription {
+    margin: 0.5rem 0;
+    color: hsl(0, 0%, 75%);
+    font-size: 1.1rem;
+}
+
+.callToAction {
+    border-radius: 3rem;
+    background-color: hsl(180, 66%, 49%);
+    padding: 0.5rem 1rem;
+    color: white;
+    width: fit-content;
+    cursor: pointer;
+    margin-top: 2rem;
+}
+
+.callToAction:hover {
+    background-color: hsl(180, 66%, 65%);
+}
+
+@media only screen and (min-width: 900px) {
+    .thirdDivContainer {
+        background-color: hsl(257, 7%, 80%);
+        padding: 0 6rem;
+        padding-top: 3rem;
+        padding-bottom: 8rem;
+    }
+
+    .advancedStatisticsContainer {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 4rem;
+    }
+
+    .advancedStatisticsContainer > div {
+        flex: 0.3;
+        padding: 2rem;
+        background-color: white;
+        border-radius: 5px;
+    }
+    
+    .advancedStatisticsContainer > div:nth-child(2) {
+        position: relative;
+        top: 2rem;
+    }
+    
+    .advancedStatisticsContainer > div:nth-child(3) {
+        position: relative;
+        top: 4rem;
+    }
+
+    .thirdDivImageContainer {
+        background-color: hsl(257, 27%, 26%);
+        width: 4rem;
+        height: 4rem;
+        padding: 1rem;
+        border-radius: 50%;
+        margin-top: -4rem;
+    }
+    
+    .thirdDivImageContainer {
+        max-width: 100%;
+        max-height: 100%;
+    }
+    
+    .advancedStatisticsContainer > div > h4 {
+        color: hsl(257, 27%, 26%);
+        margin-top: 1.5rem;
+    }
+    
+    .advancedStatisticsContainer > div > p {
+        color: hsl(0, 0%, 75%);
+        margin-top: 1.5rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .thirdDivContainer {
+        background-color: hsl(257, 7%, 80%);
+        padding: 0 2rem;
+        padding-bottom: 3rem;
+    }
+
+    .advancedStatisticsContainer {
+        margin-top: 4rem;
+    }
+
+    .advancedStatisticsContainer > div {
+        padding: 2rem;
+        background-color: white;
+        border-radius: 5px;
+        text-align: center;
+        margin-bottom: 4rem;
+    }
+
+    .thirdDivImageContainer {
+        background-color: hsl(257, 27%, 26%);
+        width: 4rem;
+        height: 4rem;
+        padding: 1rem;
+        border-radius: 50%;
+        margin: 0 auto;
+        margin-top: -4rem;
+    }
+    
+    .thirdDivImageContainer {
+        max-width: 100%;
+        max-height: 100%;
+    }
+    
+    .advancedStatisticsContainer > div > h4 {
+        color: hsl(257, 27%, 26%);
+        margin-top: 1.5rem;
+    }
+    
+    .advancedStatisticsContainer > div > p {
+        color: hsl(0, 0%, 75%);
+        margin-top: 1.5rem;
+        font-size: 0.9rem;
+    }
+}
+
+.h3Header {
+    font-weight: 700;
+    font-size: 2.5rem;
+    line-height: 2.5rem;
+    text-align: center;
+}
+
+.shortlyDescription {
+    margin: 0.5rem 0;
+    color: hsl(0, 0%, 50%);
+    font-size: 1.1rem;
+    text-align: center;
+    margin-top: 2rem;
+    line-height: 2rem;
+}
+
+@media only screen and (min-width: 900px) {
+    .fourthDivContainer {
+        background-image: url("../public/bg-boost-desktop.svg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-color: hsl(257, 27%, 26%);
+        text-align: center;
+        padding: 5rem;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .fourthDivContainer {
+        background-image: url("../public/bg-boost-mobile.svg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-color: hsl(257, 27%, 26%);
+        text-align: center;
+        padding: 4rem;
+    }
+}
+
+.fourthDivContainer > h3 {
+    font-weight: 700;
+    font-size: 2.5rem;
+    line-height: 2.5rem;
+    color: white;
+}
+
+.fourthDivContainer > p {
+    border-radius: 3rem;
+    background-color: hsl(180, 66%, 49%);
+    padding: 0.5rem 1rem;
+    color: white;
+    width: fit-content;
+    cursor: pointer;
+    margin: 0 auto;
+    margin-top: 2rem;
+}
+
+.fourthDivContainer > p:hover {
+    background-color: hsl(180, 66%, 65%);
+}
+
+/*REMOVE BREAK TAGS SELECTIVELY WHEN THE SCREEN STARTS TO GET SMALLER TO PRESERVE LAYOUT*/
+@media only screen and (max-width: 1100px) {
+  .vanishBreak {
+      display: none;
+  }
+}

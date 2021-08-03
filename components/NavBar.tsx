@@ -3,7 +3,7 @@ import { useState } from 'react'
 import styles from "../styles/NavBar.module.css"
 
 const NavBar = () => {
-    const [toggle, setToggle] = useState(false)
+    const [toggle, setToggle] = useState(true)
     const [mobileNavMenuStyle, setmobileNavMenustyle] = useState({})
     const [mobileNavContainerStyle, setmobileNavContainerStyle] = useState({})
     const [structuralDivStyle, setstructuralDivStyle] = useState({})
