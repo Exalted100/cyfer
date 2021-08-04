@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import { useState } from 'react'
 import styles from "../styles/NavBar.module.css"
+import Link from "next/link"
 
 const NavBar = () => {
     const [toggle, setToggle] = useState(true)
@@ -53,8 +54,8 @@ const NavBar = () => {
                 </ul>
 
                 <ul>
-                    <li>Login</li>
-                    <li id={styles.signUpButton}>Sign up</li>
+                    <li><Link href="/login"><a>Login</a></Link></li>
+                    <li id={styles.signUpButton}><Link href="/signup"><a>Sign up</a></Link></li>
                 </ul>
             </nav>
 

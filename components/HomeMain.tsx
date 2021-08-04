@@ -1,5 +1,6 @@
 import Image from "next/image"
 import styles from "../styles/HomeMain.module.css"
+import Link from "next/link"
 
 const HomeMain = () => {
     return (
@@ -9,7 +10,7 @@ const HomeMain = () => {
             <div>
             <h2 className={styles.landingPageHeader}>More than just <br className={styles.vanishBreak} />secure notes</h2>
             <p className={styles.landingPageDescription}>Keep track of information that is important to you <br className={styles.vanishBreak} />in a way that never falls into the wrong hands.</p>
-            <p className={styles.callToAction}>Get Started</p>
+            <p className={styles.callToAction}><Link href="/signup"><a>Get started</a></Link></p>
             </div>
         </div>
 
@@ -37,7 +38,7 @@ const HomeMain = () => {
 
         <div className={styles.fourthDivContainer}>
             <h3>Store your notes today</h3>
-            <p>Get Started</p>
+            <p><Link href="/signup"><a>Get started</a></Link></p>
         </div>
         </>
     )
