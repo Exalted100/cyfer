@@ -1,0 +1,69 @@
+@media only screen and (min-width: 900px) {
+    .footerContainer {
+        display: flex;
+        justify-content: space-between;
+        padding: 4rem 7rem;
+        background-color: hsl(255, 11%, 22%);
+        color: white;
+    }
+
+    .footerContainer > div:nth-child(5) {
+        min-width: 8rem;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .footerContainer {
+        padding: 2rem;
+        background-color: hsl(255, 11%, 22%);
+        color: white;
+        text-align: center;
+    }
+
+    .footerContainer > div:nth-child(5) {
+        margin: 0 auto;
+        margin-top: 2rem;
+        width: 50%;
+    }
+
+    .footerContainer h5 {
+        margin-top: 1.5rem;
+    }
+}
+
+.footerContainer h5 {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 1.2rem;
+    margin-top: 0;
+}
+
+.footerContainer p {
+    font-weight: 500;
+    font-size: 0.9rem;
+    margin-bottom: 0.8rem;
+    cursor: pointer;
+    color: hsl(0, 0%, 75%);
+}
+
+.footerContainer p:hover {
+    color: hsl(180, 66%, 49%);
+}
+
+.footerLogoContainer {
+    color: white;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.footerContainer > div:nth-child(5) {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footerContainer > div > div {
+    width: 1.2rem;
+    height: 1.2rem;
+    cursor: pointer;
+}
