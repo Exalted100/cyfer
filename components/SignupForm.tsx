@@ -22,8 +22,6 @@ const SignupForm = () => {
 
                 <input type="button" value="Submit"/>
             </form>
-            <p>Sign in with Google</p>
-            <p>Sign in with Facebook</p>
         </div>
     )
 }
