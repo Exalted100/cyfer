@@ -77,9 +77,10 @@ const userCtrl = {
             if(!isMatch) return res.status(400).json({msg: "Password is incorrect."})
 
             const refresh_token = createRefreshToken({id: user._id})
+            console.log(refresh_token)
             res.cookie('refreshtoken', refresh_token, {
                 httpOnly: true,
-                path: '/user/refresh_token',
+                path: '/refresh_token',
                 maxAge: 7*24*60*60*1000 // 7 days
             })
 

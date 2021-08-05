@@ -22,9 +22,11 @@ const LoginForm = () => {
         try {
             const res = await axios.post("/api/login", {email: user.email, password: user.password})
             setUser({...user, err: "", success: res.data.msg})
-            console.log(user)
+            console.log(res.data.msg)
         } catch (err) {
             setUser({...user, err: err.response.data.msg, success: ""})
+            console.log(err.message)
+            console.log(err.response.data.msg)
         }
     } 
 

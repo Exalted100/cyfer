@@ -42,6 +42,7 @@ const SignupForm = () => {
 
             setUser({...user, err: '', success: res.data.msg})
             console.log(user)
+            console.log(res.data.msg)
         } catch (err) {
             setUser({...user, err: err.response.data.msg, success: ''})
             console.log("err: " + user)
