@@ -68,8 +68,8 @@ const NavBar = () => {
                     <li>Features</li>
                     <li>Pricing</li>
                     <li>Resources</li>
-                    <li>Login</li>
-                    <li id={styles.signUpButton}>Sign up</li>
+                    <li><Link href="/login"><a>Login</a></Link></li>
+                    <li id={styles.signUpButton}><Link href="/signup"><a>Sign up</a></Link></li>
                 </ul>
             </nav>
 

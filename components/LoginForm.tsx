@@ -5,8 +5,6 @@ import { GoogleLogin } from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
 
 const LoginForm = () => {
-    const clientId = process.env.MAILING_SERVICE_CLIENT_ID
-    
     const [user, setUser] = useState({
         email: "",
         password: "",
@@ -19,7 +17,7 @@ const LoginForm = () => {
         setUser({...user, [name]: value})
     }
 
-    const onFormSubmit = async (e: any) => {
+    const onButtonClick = async (e: any) => {
         e.preventDefault()
         try {
             const res = await axios.post("/api/login", {email: user.email, password: user.password})
@@ -54,14 +52,14 @@ const LoginForm = () => {
     return (
         <div>
             <h5>Login to Cyfer</h5>
-            <form onSubmit={onFormSubmit}>
+            <form>
                 <label htmlFor="email">Email address</label>
                 <input type="email" name="email" id="" value={user.email} onChange={onInputChange}/>
 
                 <label htmlFor="password">Password</label>
                 <input type="password" name="password" id="" value={user.password} onChange={onInputChange}/>
 
-                <input type="button" value="Submit"/>
+                <input type="button" value="Submit" onClick={onButtonClick}/>
             </form>
             <p>Forgot password?</p>
             <div>

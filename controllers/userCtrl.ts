@@ -13,6 +13,7 @@ const {CLIENT_URL} = process.env
 const userCtrl = {
     register: async (req: any, res: any) => {
         try {
+            console.log("trying registration")
             const {firstName, lastName, email, password} = req.body
             
             if(!firstName || !lastName || !email || !password)
@@ -35,7 +36,7 @@ const userCtrl = {
 
             const activation_token = createActivationToken(newUser)
 
-            const url = `${CLIENT_URL}/user/activate/${activation_token}`
+            const url = `${CLIENT_URL}/activate/${activation_token}`
             sendMail(email, url, "Verify your email address")
 
 

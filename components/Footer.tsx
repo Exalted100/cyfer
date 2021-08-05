@@ -7,9 +7,9 @@ const Footer = () => {
             <div className={styles.footerLogoContainer}>Cyfer</div>
             <div>
                 <h5>Features</h5>
-                <p>Link Shortening</p>
-                <p>Branded Links</p>
-                <p>Analytics</p>
+                <p>Notes creation</p>
+                <p>Note storing</p>
+                <p>Ciphered notes</p>
             </div>
             <div>
                 <h5>Resources</h5>
