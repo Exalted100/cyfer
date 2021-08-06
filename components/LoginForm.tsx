@@ -1,10 +1,12 @@
 import { useState } from "react"
+import { useRouter } from 'next/router'
 import styles from "../styles/LoginForm.module.css"
 import axios from "axios"
 import { GoogleLogin } from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
 
 const LoginForm = () => {
+    const router = useRouter()
     const [user, setUser] = useState({
         email: "",
         password: "",
@@ -22,7 +24,9 @@ const LoginForm = () => {
         try {
             const res = await axios.post("/api/login", {email: user.email, password: user.password})
             setUser({...user, err: "", success: res.data.msg})
-            console.log(res.data.msg)
+            localStorage.setItem('refreshToken', res.data.refresh_token)
+            console.log(localStorage.getItem("refreshToken"))
+            router.push("/profile")
         } catch (err) {
             setUser({...user, err: err.response.data.msg, success: ""})
             console.log(err.message)
@@ -85,3 +89,7 @@ const LoginForm = () => {
 }
 
 export default LoginForm
+
+function useHistory() {
+    throw new Error("Function not implemented.");
+}

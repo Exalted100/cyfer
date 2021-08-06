@@ -77,13 +77,13 @@ const userCtrl = {
             if(!isMatch) return res.status(400).json({msg: "Password is incorrect."})
 
             const refresh_token = createRefreshToken({id: user._id})
-            res.cookie('refreshtoken', refresh_token, {
-                httpOnly: true,
-                path: '/refresh_token',
-                maxAge: 7*24*60*60*1000 // 7 days
-            })
+            // res.cookie('refreshtoken', refresh_token, {
+            //     httpOnly: true,
+            //     path: '/refresh_token',
+            //     maxAge: 7*24*60*60*1000 // 7 days
+            // })
 
-            res.json({msg: "Login successful!"})
+            res.json({msg: "Login successful!", refresh_token})
         } catch (err) {
             return res.status(500).json({msg: err.message})
         }
@@ -135,7 +135,9 @@ const userCtrl = {
     },
     getUserInfor: async (req: any, res: any) => {
         try {
-            const user = await Users.findById(req.user.id).select('-password')
+            console.log(req.user)
+            const user = await Users.find().select('-password')
+            console.log(user)
 
             res.json(user)
         } catch (err) {
