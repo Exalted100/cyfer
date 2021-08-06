@@ -9,8 +9,7 @@ const authMiddleware = (req: any, res: any, next: any) => {
         jwt.verify(token, process.env.ACCESS_TOKEN_SECRET || "", (err: any, user: any) => {
             if(err) return res.status(400).json({msg: "Invalid Authentication."})
 
-            req.user = {user}
-            console.log(req.user)
+            req.user = user
         })
         next()
     } catch (err) {

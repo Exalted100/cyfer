@@ -135,8 +135,8 @@ const userCtrl = {
     },
     getUserInfor: async (req: any, res: any) => {
         try {
-            console.log(req.user)
-            const user = await Users.find().select('-password')
+            console.log(req.user.id)
+            const user = await Users.findById(req.user.id).select('-password')
             console.log(user)
 
             res.json(user)
